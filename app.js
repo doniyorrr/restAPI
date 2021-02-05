@@ -32,7 +32,7 @@ app.use(express.static(path.join(__dirname , `public`)))
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 
-app.use(rIndex)
+app.use(`/api/movies`, rIndex)
 
 app.listen(port , ()=>{
     console.log(`server running`)

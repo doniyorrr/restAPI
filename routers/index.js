@@ -1,11 +1,28 @@
 const express = require(`express`)
 const router = express.Router()
+const movies = require(`../model/schema`)
 
-app.get(`/` , (req , res ) =>{
+router.get(`/` , (req , res ) =>{
     res.send(`salom method of get`)
 })
-app.post(`/` , (req , res ) =>{
-    res.send(`salom method of post`)
+router.post(`/` , (req , res ) =>{
+    const { title , category , country, year , director_id , imdb_score}=req.body
+    const db = new movies({
+        title: title,
+        category: category,
+        country: country,
+        year: year,
+        director_id: director_id,
+        imdb_score: imdb_score
+    })
+    const promise = db.save()
+        promise.then(data =>{
+            res.json(data)
+        })
+        .catch(err=>{
+            console.log(err)
+        })
+
 })
 
 
