@@ -6,15 +6,8 @@ router.get(`/` , (req , res ) =>{
     res.send(`salom method of get`)
 })
 router.post(`/` , (req , res ) =>{
-    const { title , category , country, year , director_id , imdb_score}=req.body
-    const db = new movies({
-        title: title,
-        category: category,
-        country: country,
-        year: year,
-        director_id: director_id,
-        imdb_score: imdb_score
-    })
+    // const { title , category , country, year , director_id , imdb_score}=req.body
+    const db = new movies(req.body)
     const promise = db.save()
         promise.then(data =>{
             res.json(data)
@@ -24,6 +17,7 @@ router.post(`/` , (req , res ) =>{
         })
 
 })
+
 
 
 module.exports = router
